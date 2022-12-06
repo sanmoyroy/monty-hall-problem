@@ -8,6 +8,7 @@
         "esModuleInterop": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
         "paths": {
             "*": [
                 "./node_modules/*"
@@ -15,7 +16,7 @@
         }
     },
     "include": [
-        "src/*.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules",

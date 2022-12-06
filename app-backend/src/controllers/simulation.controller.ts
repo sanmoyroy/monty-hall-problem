@@ -1,6 +1,7 @@
-import { GameResult, SimulationDetails, SimulationResults } from "./models";
+import { GameResult, SimulationDetails, SimulationResults } from "../models/simulation.models";
+import { SimulationService } from "../services/simulation.service";
 
-export class Simulation {
+export class SimulationController {
 
     public static readonly DOORS = ['a', 'b', 'c'];
     public static totalWins: number;
@@ -30,7 +31,7 @@ export class Simulation {
         let unchosenDoors = ['a', 'b', 'c'];
 
         // Randomly decide a winning door
-        const winningDoor = this.DOORS[this.getRandomIndexOfArray(this.DOORS)];
+        const winningDoor = this.DOORS[SimulationService.getRandomIndexOfArray(this.DOORS)];
 
         // Remove the chosen door from unchosenDoors array, since the player has chosen it
         unchosenDoors = unchosenDoors.filter(door => door !== chosenDoor);
@@ -43,7 +44,7 @@ export class Simulation {
         }
 
         // The door that the host opens - a choice from the doorsAvailableToBeOpened
-        const doorToOpen = doorsAvailableToBeOpened[this.getRandomIndexOfArray(doorsAvailableToBeOpened)];
+        const doorToOpen = doorsAvailableToBeOpened[SimulationService.getRandomIndexOfArray(doorsAvailableToBeOpened)];
 
         // Remove the opened door from the unchosenDoors array. It is left with just 1 door now
         unchosenDoors = unchosenDoors.filter(door => door !== doorToOpen);
@@ -61,9 +62,5 @@ export class Simulation {
             }
         }
         return false;
-    }
-
-    private static getRandomIndexOfArray(arr: string[]): number {
-        return Math.floor(Math.random() * arr.length);
     }
 }

@@ -1,0 +1,155 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Monty Hall Simulator",
+        "description": "A simulator for the Monty Hall problem",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9090/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Simulations",
+            "description": "API for doing Monty Hall simulations"
+        }
+    ],
+    "paths": {
+        "/api/simulation-results": {
+            "post": {
+                "tags": [
+                    "Simulations"
+                ],
+                "summary": "Create a new simulation",
+                "requestBody": {
+                    "description": "Simulation Details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Details"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Results"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Result": {
+                "type": "object",
+                "properties": {
+                    "gameId": {
+                        "type": "number"
+                    },
+                    "gameResult": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Results": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Result"
+                        }
+                    },
+                    "totalWins": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ErrorMessage": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "param": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Errors": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ErrorMessage"
+                        }
+                    }
+                }
+            },
+            "Details": {
+                "type": "object",
+                "properties": {
+                    "simulationDetails": {
+                        "type": "object",
+                        "properties": {
+                            "numberOfSimulations": {
+                                "type": "number",
+                                "required": true
+                            },
+                            "chosenDoor": {
+                                "type": "string",
+                                "required": true
+                            },
+                            "preference": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
