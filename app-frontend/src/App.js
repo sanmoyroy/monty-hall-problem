@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import SimulationForm from './components/SimulationForm/SimulationForm';
+import { useState } from 'react';
+import SimulationResult from './components/SimulationResult/SimulationResult';
 
 function App() {
+  const [data, setData] = useState({'results': [], totalWins: 0});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h2 className='title'>Monty Hall Simulator</h2>
+      <SimulationForm setData={setData} />
+      <hr />
+      <h3 className='title'>Simulation Results</h3>
+      <SimulationResult data={data} />
     </div>
   );
 }

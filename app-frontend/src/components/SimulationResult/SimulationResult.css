@@ -1,0 +1,13 @@
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+.simulation-results {
+    margin-left: 64px;
+}
+
+.game-results {
+    margin-top: 8px;
+}
