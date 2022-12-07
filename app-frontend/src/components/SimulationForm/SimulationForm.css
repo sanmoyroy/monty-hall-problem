@@ -10,8 +10,9 @@
     margin-top: 16px;
 }
 
-.text-danger {
+.text-warning {
     margin-left: 8px;
+    color: red;
 }
 
 label {

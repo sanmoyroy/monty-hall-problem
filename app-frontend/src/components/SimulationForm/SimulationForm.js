@@ -11,12 +11,18 @@ function SimulationForm({ setData }) {
     const [noOfSimulations, setNoOfSimulations] = useState('');
     const [door, setDoor] = useState('');
     const [preference, setPreference] = useState('');
+    const [apiError, setApiError] = useState(null);
 
-    const { post } = useApi();
+    const onError = (response) => {
+        setApiError(response);
+    }
+
+    const { post } = useApi(onError);
 
     const handleClick = (event) => {
         event.preventDefault();
         setData({ 'results': [], totalWins: 0 });
+        setApiError(null);
         const simulationData = {
             "simulationDetails": {
                 "numberOfSimulations": noOfSimulations,
@@ -26,8 +32,8 @@ function SimulationForm({ setData }) {
         };
 
         post('http://localhost:9090/api/simulation-results', simulationData).then(data => {
-            setData(data);
-        });
+            !data ? setData({ 'results': [], totalWins: 0 }) : setData(data);
+        })
     }
 
     const isValueOutOfRange = () => {
@@ -73,12 +79,13 @@ function SimulationForm({ setData }) {
                 value='Run Simulation'
                 disabled={isValueOutOfRange() || noOfSimulations === '' || door === '' || preference === ''}
             />
+            {apiError && <span className='text-warning'>{apiError.statusText}</span>}
         </div>
     );
 }
 
 SimulationForm.propTypes = {
-    setData: PropTypes.func
+    setData: PropTypes.func.isRequired
 }
 
 export default SimulationForm;

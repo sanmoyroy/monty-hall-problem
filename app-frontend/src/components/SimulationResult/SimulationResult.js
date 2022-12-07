@@ -27,7 +27,7 @@ function SimulationResult({ data }) {
 }
 
 SimulationResult.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object.isRequired
 }
 
 export default SimulationResult;

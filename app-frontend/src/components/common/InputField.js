@@ -24,7 +24,7 @@ function InputField({ value, label, placeholder, validators, onChange }) {
                 onChange={handleChange}
             />
 
-            {error && <span className='text-danger'>{error.message}</span>}
+            {error && <span className='text-warning'>{error.message}</span>}
         </div>
     )
 };
