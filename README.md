@@ -34,6 +34,11 @@ Go to frontend folder
 cd app-frontend
 ```
 
+Install dependencies
+```
+npm install
+```
+
 Start app
 ```
 npm start
